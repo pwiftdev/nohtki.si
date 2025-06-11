@@ -1,7 +1,6 @@
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import DecorativeElements from "./components/DecorativeElements";
 import { AuthProvider } from "@/lib/contexts/AuthContext";
 import type { Metadata } from "next";
 
@@ -19,7 +18,6 @@ export default function RootLayout({
     <html lang="sl">
       <body className="bg-[#faf5f7]">
         <AuthProvider>
-          <DecorativeElements />
           <Header />
           {children}
           <Footer />

@@ -12,6 +12,7 @@ interface ReviewCardProps {
     rating: number;
     comment: string;
     createdAt: Date;
+    imageUrl?: string;
   };
 }
 
@@ -57,6 +58,12 @@ export function ReviewCard({ review }: ReviewCardProps) {
       </div>
 
       <p className="text-gray-700 whitespace-pre-wrap">{review.comment}</p>
+
+      {review.imageUrl && (
+        <div className="w-full flex justify-center">
+          <img src={review.imageUrl} alt="Review" className="max-h-48 rounded-lg shadow" />
+        </div>
+      )}
     </motion.div>
   );
 } 

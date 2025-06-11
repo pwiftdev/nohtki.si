@@ -24,6 +24,7 @@ export interface Review {
   userPhoto?: string;
   rating: number;
   comment: string;
+  imageUrl?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -35,6 +36,7 @@ export async function submitReview(
   review: {
     rating: number;
     comment: string;
+    imageUrl?: string;
   }
 ): Promise<void> {
   console.log('Submitting review:', { userId, userName, userPhoto, review });
@@ -47,6 +49,7 @@ export async function submitReview(
       userPhoto: userPhoto || null,
       rating: review.rating,
       comment: review.comment,
+      imageUrl: review.imageUrl || null,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     });
@@ -96,6 +99,7 @@ export async function getReviews(
         userPhoto: data.userPhoto,
         rating: data.rating,
         comment: data.comment,
+        imageUrl: data.imageUrl || undefined,
         createdAt: data.createdAt?.toDate() || new Date(),
         updatedAt: data.updatedAt?.toDate() || new Date()
       });

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { StarRating } from './StarRating';
@@ -9,6 +9,7 @@ interface ReviewFormProps {
   onSubmit: (review: {
     rating: number;
     comment: string;
+    imageUrl?: string;
   }) => Promise<void>;
 }
 
@@ -18,6 +19,35 @@ export function ReviewForm({ onSubmit }: ReviewFormProps) {
   const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | undefined>();
+  const [imageUploading, setImageUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImageUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'unsigned_reviews');
+    try {
+      const res = await fetch('https://api.cloudinary.com/v1_1/dawawdluc/image/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await res.json();
+      setImageUrl(data.secure_url);
+    } catch (err) {
+      setError('Napaka pri nalaganju slike.');
+    } finally {
+      setImageUploading(false);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setImageUrl(undefined);
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,12 +73,15 @@ export function ReviewForm({ onSubmit }: ReviewFormProps) {
     try {
       await onSubmit({
         rating,
-        comment: comment.trim()
+        comment: comment.trim(),
+        imageUrl,
       });
 
       // Reset form
       setRating(0);
       setComment('');
+      setImageUrl(undefined);
+      if (fileInputRef.current) fileInputRef.current.value = '';
     } catch (err) {
       setError('Napaka pri oddaji ocene. Prosimo, poskusite ponovno.');
       console.error('Error submitting review:', err);
@@ -86,6 +119,24 @@ export function ReviewForm({ onSubmit }: ReviewFormProps) {
           rows={4}
           placeholder="Delite svojo izkušnjo..."
         />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Slika (neobvezno)</label>
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          onChange={handleImageChange}
+          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100"
+        />
+        {imageUploading && <p className="text-xs text-gray-500 mt-2">Nalaganje slike...</p>}
+        {imageUrl && (
+          <div className="mt-2 relative">
+            <img src={imageUrl} alt="Naložena slika" className="max-h-32 rounded shadow" />
+            <button type="button" onClick={handleRemoveImage} className="absolute top-1 right-1 bg-white/80 rounded-full px-2 py-1 text-xs text-pink-700 hover:bg-pink-100">Odstrani</button>
+          </div>
+        )}
       </div>
 
       {error && (

@@ -33,7 +33,7 @@ export default function Header() {
               />
             </Link>
 
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden lg:flex items-center space-x-8">
               <Link 
                 href="/"
                 className="text-white hover:text-pink-200 transition-colors"
@@ -51,6 +51,24 @@ export default function Header() {
                 className="text-white hover:text-pink-200 transition-colors"
               >
                 Storitve
+              </a>
+              <a
+                href="#galerija"
+                className="text-white hover:text-pink-200 transition-colors"
+              >
+                Galerija
+              </a>
+              <a
+                href="#ocene"
+                className="text-white hover:text-pink-200 transition-colors"
+              >
+                Ocene
+              </a>
+              <a
+                href="#kontakt"
+                className="text-white hover:text-pink-200 transition-colors"
+              >
+                Kontakt
               </a>
               <a 
                 href="https://wa.me/38630357237"
@@ -83,7 +101,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden text-white p-2 relative z-[60]"
+              className="lg:hidden text-white p-2 relative z-[60]"
               aria-label="Toggle menu"
             >
               <div className="w-6 h-5 relative flex flex-col justify-between">

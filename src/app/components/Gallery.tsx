@@ -44,7 +44,7 @@ export default function Gallery() {
   }, []);
 
   return (
-    <section className="relative py-20 overflow-hidden bg-[#faf5f7]">
+    <section id="galerija" className="relative py-20 overflow-hidden bg-[#faf5f7]">
       {/* Animated gradient blobs */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-to-br from-[#8b2d5d]/20 to-transparent rounded-full blur-3xl" />

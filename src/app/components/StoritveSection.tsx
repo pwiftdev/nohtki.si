@@ -34,7 +34,7 @@ const storitve = [
 
 export default function StoritveSection() {
   return (
-    <section className="py-20 bg-[#faf5f7] text-[#6b2243]">
+    <section id="storitve" className="py-20 bg-[#faf5f7] text-[#6b2243]">
       <div className="container mx-auto px-4 max-w-3xl">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Storitve</h2>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-8">

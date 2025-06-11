@@ -13,6 +13,9 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     { href: '/', label: 'Domov' },
     { href: '/ideje', label: 'Ideje' },
     { href: '#storitve', label: 'Storitve' },
+    { href: '#galerija', label: 'Galerija' },
+    { href: '#ocene', label: 'Ocene' },
+    { href: '#kontakt', label: 'Kontakt' },
     { href: 'https://wa.me/38630357237', label: 'NAROČI SE', isExternal: true },
   ];
 

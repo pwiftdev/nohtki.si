@@ -176,7 +176,7 @@ export default function ReviewsSection() {
                     <button onClick={() => { setIsEditing(false); setEditReview(null); }} className="px-4 py-1 text-sm bg-gray-200 rounded hover:bg-gray-300 transition">Prekliči</button>
                   </div>
                 )}
-                <div className="flex justify-end mt-2">
+                <div className="flex justify-end mt-2 relative z-10 pointer-events-auto">
                   <SignOutButton />
                 </div>
               </>
@@ -190,7 +190,7 @@ export default function ReviewsSection() {
         </div>
         <ReviewList initialReviews={reviews} onLoadMore={loadMoreReviews} hasMore={hasMore} />
         {user && (
-          <div className="flex justify-end mt-8">
+          <div className="flex justify-end mt-8 relative z-10 pointer-events-auto">
             <SignOutButton />
           </div>
         )}

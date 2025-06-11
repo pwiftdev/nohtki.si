@@ -5,9 +5,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import MobileMenu from './MobileMenu';
+import { useAuth } from '@/lib/hooks/useAuth';
+import SignOutButton from './SignOutButton';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user } = useAuth();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -32,10 +35,10 @@ export default function Header() {
 
             <nav className="hidden md:flex items-center space-x-8">
               <Link 
-                href="/o-nas" 
+                href="/"
                 className="text-white hover:text-pink-200 transition-colors"
               >
-                O nas
+                Domov
               </Link>
               <Link 
                 href="/ideje" 
@@ -43,6 +46,12 @@ export default function Header() {
               >
                 Ideje
               </Link>
+              <a
+                href="#storitve"
+                className="text-white hover:text-pink-200 transition-colors"
+              >
+                Storitve
+              </a>
               <a 
                 href="https://wa.me/38630357237"
                 target="_blank"
@@ -64,6 +73,11 @@ export default function Header() {
                 </motion.div>
                 <span className="relative z-10 font-semibold">NAROČI SE</span>
               </a>
+              {user && (
+                <div className="ml-4">
+                  <SignOutButton />
+                </div>
+              )}
             </nav>
 
             {/* Mobile Menu Button */}

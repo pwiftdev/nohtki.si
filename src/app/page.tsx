@@ -6,6 +6,8 @@ import Hero from "./components/Hero";
 import Contact from "./components/Contact";
 import DecorativeElements from "./components/DecorativeElements";
 import LoadingScreen from "./components/LoadingScreen";
+import ReviewsSection from './components/ReviewsSection';
+import StoritveSection from './components/StoritveSection';
 
 const steps = [
   {
@@ -60,7 +62,9 @@ export default function Home() {
           <Hero />
           <Features />
           <Gallery />
+          <ReviewsSection />
           <Contact />
+          <StoritveSection />
           <Roadmap />
         </div>
       </div>

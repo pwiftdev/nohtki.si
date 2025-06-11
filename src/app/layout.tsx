@@ -2,6 +2,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import DecorativeElements from "./components/DecorativeElements";
+import { AuthProvider } from "@/lib/contexts/AuthContext";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,10 +18,12 @@ export default function RootLayout({
   return (
     <html lang="sl">
       <body className="bg-[#faf5f7]">
-        <DecorativeElements />
-        <Header />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <DecorativeElements />
+          <Header />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

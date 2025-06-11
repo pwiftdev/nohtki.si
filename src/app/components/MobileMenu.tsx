@@ -10,8 +10,9 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const menuItems = [
-    { href: '/o-nas', label: 'O nas' },
+    { href: '/', label: 'Domov' },
     { href: '/ideje', label: 'Ideje' },
+    { href: '#storitve', label: 'Storitve' },
     { href: 'https://wa.me/38630357237', label: 'NAROČI SE', isExternal: true },
   ];
 
